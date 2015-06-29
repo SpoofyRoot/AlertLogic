@@ -36,5 +36,10 @@ Information about the various APIs can be found [online.](https://www.alertlogic
 >>> tmAppliances = tm.GetAppliances()
 >>> tmAppliances.Status
 {'new': 0, 'offline': 2, 'warning': 0, 'ok': 3, 'error': 0}
+>>> tmAppliances.totalMonthMBytes
+4772.830846786499
+>>> 
 ```
+
+you get the idea. 
 
