@@ -36,7 +36,7 @@ class Incidents(object):
 
     @property
     def count(self):
-        return len(self._incidents)
+        return len(self.IncidentList)
     @property
     def Threats(self):
         high = 0
