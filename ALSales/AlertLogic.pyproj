@@ -6,7 +6,7 @@
     <ProjectGuid>fa234b59-9d6b-42b4-95cf-fd28d4f3bc1f</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>ThreatManager.py</StartupFile>
+    <StartupFile>User.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,7 +29,13 @@
     <Compile Include="LogManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PasswordGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ThreatManager.py" />
+    <Compile Include="User.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
