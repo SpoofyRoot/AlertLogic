@@ -6,7 +6,7 @@
     <ProjectGuid>fa234b59-9d6b-42b4-95cf-fd28d4f3bc1f</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>User.py</StartupFile>
+    <StartupFile>AlertLogic\User.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,22 +23,28 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Customer.py">
+    <Compile Include="AlertLogic\Customer.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Incidents.py">
+    <Compile Include="AlertLogic\Incidents.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LogManager.py">
+    <Compile Include="AlertLogic\LogManager.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PasswordGenerator.py">
+    <Compile Include="AlertLogic\PasswordGenerator.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ThreatManager.py" />
-    <Compile Include="User.py">
+    <Compile Include="AlertLogic\ThreatManager.py" />
+    <Compile Include="AlertLogic\User.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Setup.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AlertLogic\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
