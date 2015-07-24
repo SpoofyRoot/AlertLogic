@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Customer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Incidents.py">
       <SubType>Code</SubType>
     </Compile>

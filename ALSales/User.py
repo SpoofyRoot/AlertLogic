@@ -50,7 +50,7 @@ class User(object):
 
     def get(self):
         data = self.request('https://api.alertlogic.net/api/user/v1')
-        print json.loads(data)
+        return json.loads(data)
 
     def delete(self,user_id):
         url = 'https://api.alertlogic.net/api/user/v1/' + str(user_id)
