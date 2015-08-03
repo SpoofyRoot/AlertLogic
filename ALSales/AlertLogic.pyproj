@@ -32,11 +32,17 @@
     <Compile Include="LogManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Order.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PasswordGenerator.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ThreatManager.py" />
     <Compile Include="User.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
