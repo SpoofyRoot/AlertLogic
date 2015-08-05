@@ -6,13 +6,15 @@
     <ProjectGuid>fa234b59-9d6b-42b4-95cf-fd28d4f3bc1f</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>AlertLogic\User.py</StartupFile>
+    <StartupFile>AlertLogic\scratch.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>AlertLogic</Name>
     <RootNamespace>ALSales</RootNamespace>
+    <InterpreterId>{58d10c03-2997-4d39-8c1d-7497acb320d7}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,11 +34,19 @@
     <Compile Include="AlertLogic\LogManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AlertLogic\Order.py" />
     <Compile Include="AlertLogic\PasswordGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AlertLogic\scratch.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AlertLogic\ThreatManager.py" />
     <Compile Include="AlertLogic\User.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AlertLogic\Utils.py" />
+    <Compile Include="AlertLogic\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Setup.py">
@@ -45,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AlertLogic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{58d10c03-2997-4d39-8c1d-7497acb320d7}\2.7" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

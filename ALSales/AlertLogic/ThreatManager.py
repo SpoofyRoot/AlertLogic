@@ -1,12 +1,16 @@
 import json
 import urllib2
 import base64
+import requests
 
 
 class AlertLogicTm(object):
     def __init__(self, api_key):
         self.api_key = base64.encodestring('%s:' % api_key).replace('\n', '')
         self.user_agent = "SalesMonitoringAgent"
+        self.headers = {'Authorization': "Basic %s" % self.api_key }
+        self.headers['Content-type'] = 'application/json'
+        self.headers['Accept'] = 'application/json'
 
     def request(self, endpoint):
         """
@@ -36,13 +40,6 @@ class AlertLogicTm(object):
 
         return(r)
 
-    @property
-    def appliances(self):
-        url = 'https://publicapi.alertlogic.net/api/tm/v1/appliances'
-        app = Appliances(self.request(url))
-        return app.appliances
-
-    
     def GetAppliances(self):
         url = 'https://publicapi.alertlogic.net/api/tm/v1/appliances'
         app = Appliances(self.request(url))
@@ -53,6 +50,46 @@ class AlertLogicTm(object):
         policies = Policies(self.request(url))
         return policies
 
+    """
+    Code updates assignment policy, can be modified to include appliances, 
+    change policy name, or add other data with minor changes.  
+    appliances is expected to be a list of appliance UUIDs 
+    """
+    def UpdateAssignmentPolicy(self,id,name,appliances=None):
+        policyData = {"name":name,"type":"appliance_assignment"}
+        applianceList = []
+        if(appliances != None):
+            for appliance in appliances:
+                applianceList.append(appliance)
+            policyData['appliances'] = applianceList
+        url = "https://publicapi.alertlogic.net/api/tm/v1/policies/" + id
+        policy = {'policy':policyData}
+        r = requests.post(url, data=json.dumps(policy), headers=self.headers, verify=False)
+
+    """
+    method to update host policy
+    """
+    def UpdateHostPolicy(self,id,name,tags=None):
+        policyData = {"name":name,"type":"tmhost"}
+        policyData['tmhost'] = {'encrypt': True}
+
+        # if we have tags add them
+        tagList = []
+        for tag in tags:
+            tagList.append({'name':tag})
+        if(len(tagList>0)):
+            policyData['tags'] = tagList
+        policy = {'policy':policyData}
+        url = "https://publicapi.alertlogic.net/api/tm/v1/policies/" + id
+        r = requests.post(url, data=json.dumps(policy), headers=self.headers, verify=False)
+
+    @property
+    def appliances(self):
+        url = 'https://publicapi.alertlogic.net/api/tm/v1/appliances'
+        app = Appliances(self.request(url))
+        return app.appliances
+
+    
     @property
     def protectedhosts(self):
         url = 'https://publicapi.alertlogic.net/api/tm/v1//protectedhosts'
@@ -114,6 +151,11 @@ class Appliances(object):
             if 'last_day_total_bytes' in i['appliance']['stats'].keys():
                 self.total = self.total + i['appliance']['stats']['last_day_total_bytes']
         return self.bytesto(self.total,'m')
+
+
+
+
+
 
 class Sources(object):
     def __init__(self, j):
