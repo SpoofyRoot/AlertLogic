@@ -48,11 +48,20 @@ class AlertLogicTm(object):
         app = Appliances(self.request(url))
         return app
 
+    def GetPolicies(self):
+        url = 'https://publicapi.alertlogic.net/api/tm/v1/policies/'
+        policies = Policies(self.request(url))
+        return policies
+
     @property
     def protectedhosts(self):
         url = 'https://publicapi.alertlogic.net/api/tm/v1//protectedhosts'
         hosts = ProtectedHosts(self.request(url))
         return hosts
+
+class Policies(object):
+    def __init__(self, j):
+        self.__dict__ = json.loads(j)
 
 class Appliances(object):
     def __init__(self, j):
