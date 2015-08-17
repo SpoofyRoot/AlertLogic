@@ -1,4 +1,5 @@
 import requests
+import time
 
 class Utils():
     '''
@@ -21,3 +22,23 @@ class Utils():
         if(r.text.find('Bootstrap') < 0):
             return False
         return True
+    
+    """
+    Loop waiting for appliance to come online and claim it. 
+    """
+    def WaitAndClaim(self,ip,apikey,datacenter,name):
+
+        status = True
+        while status:
+            try:
+                status = self.IsBootStrapping(ip)
+                print("Appliance is bootstrapping, waiting")
+                time.sleep(20)
+            except requests.exceptions.RequestException as e:
+                print("Appliance is offline, waiting")
+                pass
+
+        if(status == False):
+            print("Claiming appliance")
+            self.ClaimAppliance(ip,apikey,datacenter,name)
+
