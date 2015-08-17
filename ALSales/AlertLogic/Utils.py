@@ -33,7 +33,7 @@ class Utils():
             try:
                 status = self.IsBootStrapping(ip)
                 print("Appliance is bootstrapping, waiting")
-                time.sleep(20)
+                time.sleep(60)
             except requests.exceptions.RequestException as e:
                 print("Appliance is offline, waiting")
                 pass
