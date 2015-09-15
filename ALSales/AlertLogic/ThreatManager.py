@@ -2,7 +2,7 @@ import json
 import urllib2
 import base64
 import requests
-
+from requests.packages import urllib3
 
 class AlertLogicTm(object):
     def __init__(self, api_key):
@@ -11,6 +11,7 @@ class AlertLogicTm(object):
         self.headers = {'Authorization': "Basic %s" % self.api_key }
         self.headers['Content-type'] = 'application/json'
         self.headers['Accept'] = 'application/json'
+        urllib3.disable_warnings()
 
     def request(self, endpoint):
         """
@@ -40,15 +41,26 @@ class AlertLogicTm(object):
 
         return(r)
 
-    def GetAppliances(self):
+    def GetAppliances(self, CustID=None):
         url = 'https://publicapi.alertlogic.net/api/tm/v1/appliances'
-        app = Appliances(self.request(url))
-        return app
+        if(CustID != None):
+                url = 'https://publicapi.alertlogic.net/api/tm/v1/' + str(CustID) + '/appliances/'
+        data = requests.get(url,headers=self.headers,verify=False)
+        return json.loads(data.text)
 
-    def GetPolicies(self):
+    def GetPolicies(self, CustID=None):
         url = 'https://publicapi.alertlogic.net/api/tm/v1/policies/'
-        policies = Policies(self.request(url))
-        return policies
+        if(CustID != None):
+                url = 'https://publicapi.alertlogic.net/api/tm/v1/' + str(CustID) + '/policies/'
+        data = requests.get(url,headers=self.headers,verify=False)
+        return json.loads(data.text)
+
+    def GetProtectedHosts(self,CustID=None):
+        url = 'https://publicapi.alertlogic.net/api/tm/v1/protectedhosts/'
+        if(CustID != None):
+            url = 'https://publicapi.alertlogic.net/api/tm/v1/' + CustID + '/protectedhosts/'
+        data = requests.get(url,headers=self.headers,verify=False)
+        return json.loads(data.text)
 
     """
     Code updates assignment policy, can be modified to include appliances, 
@@ -67,7 +79,7 @@ class AlertLogicTm(object):
         r = requests.post(url, data=json.dumps(policy), headers=self.headers, verify=False)
 
     """
-    method to update host policy
+    method to update host policy name
     """
     def UpdateHostPolicy(self,id,name,tags=None):
         policyData = {"name":name,"type":"tmhost"}

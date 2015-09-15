@@ -1,6 +1,7 @@
 import requests
 import base64
 import json
+from requests.packages import urllib3
 
 class Order(object):
     def __init__(self, api_key):
@@ -8,6 +9,7 @@ class Order(object):
         self.headers = {'Authorization': "Basic %s" % self.api_key }
         self.headers['Content-type'] = 'application/json'
         self.headers['Accept'] = 'application/json'
+        urllib3.disable_warnings()
 
 
     def Create(self,custid,name,public_ip):
